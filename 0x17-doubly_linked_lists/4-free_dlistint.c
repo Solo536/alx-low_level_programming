@@ -1,17 +1,20 @@
 #include "lists.h"
+#include <stdlib.h>
 
 /**
- * free_dlistint - Frees a linked dlistint_t list.
- * @head: The head of the dlistint_t list.
+ * free_dlistint - frees a doubly linked list with only int data, no strings
+ * @head: pointer to head of list
  */
 void free_dlistint(dlistint_t *head)
 {
-	dlistint_t *tmp;
+	/* return if empty list */
+	if (!head)
+		return;
 
-	while (head)
+	while (head && head->next)
 	{
-		tmp = head->next;
-		free(head);
-		head = tmp;
+		head = head->next;
+		free(head->prev);
 	}
+	free(head);
 }
